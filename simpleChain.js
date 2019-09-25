@@ -15,18 +15,60 @@ setTimeout(function () {
  ** Function for Create Tests Blocks   ****
  ******************************************/
 
+// (function testAddDataToLevelDB(){
+//     let testBlock = new Block.Block("test");
+//     setTimeout(function(){
+//         return addDataToLevelDB(2,testBlock)
+//             .then(value => {
+//                 console.log(value);
+//             })
+//             .catch(err => console.log(err));
+//     },1000);
+// })(0);
 
-(function theLoop (i) {
-	setTimeout(function () {
-		let blockTest = new Block.Block("Test Block - " + (i + 1));
-		// Be careful this only will work if your method 'addBlock' in the Blockchain.js file return a Promise
-		myBlockChain.addBlock(blockTest).then((result) => {
-			console.log(result);
-			i++;
-			if (i < 10) theLoop(i);
-		});
-	}, 2000);
-  })(0);
+
+(function testGetBlockHeight(){
+    setTimeout(function () {
+        myBlockChain.getBlockHeight()
+            .then(value => {
+                console.log(value);
+            })
+            .catch(err => console.log(err));
+    },1000);
+})(0);
+
+(function testGetAllBlocks(){
+    setTimeout(function () {
+        myBlockChain.getAllBlocks()
+            .then(value => {
+                console.log(value);
+            })
+            .catch(err => console.log(err));
+    },1000);
+})(0);
+
+(function testGetBlock(){
+    setTimeout(function () {
+        myBlockChain.getBlock(0)
+            .then(value => {
+                console.log(value);
+            })
+            .catch(err => console.log(err));
+    },1000);
+})(0);
+
+
+// (function theLoop (i) {
+// 	setTimeout(function () {
+// 		let blockTest = new Block.Block("Test Block - " + (i + 1));
+// 		// Be careful this only will work if your method 'addBlock' in the Blockchain.js file return a Promise
+// 		myBlockChain.addBlock(blockTest).then((result) => {
+// 			console.log(result);
+// 			i++;
+// 			if (i < 10) theLoop(i);
+// 		});
+// 	}, 5000);
+//   })(0);
 
 
 /***********************************************

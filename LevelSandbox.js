@@ -25,7 +25,6 @@ class LevelSandbox {
                     console.log('data not found!');
                     reject(err);
                 })
-
         });
     }
 
@@ -37,12 +36,11 @@ class LevelSandbox {
             self.db.put(key, value)
                 .then(() => {
                     console.log(key);
-                    resolve();
+                    resolve("success!");
                 })
                 .catch(err => {
                     reject(err);
-            })
-            
+            })  
         });
     }
 
@@ -64,12 +62,51 @@ class LevelSandbox {
                     resolve(height);
                 })
             // console.log('Value = ' + value);
-            
-        })
-    };
-    
+        });
+    }
+
+    // Get all data
+    getAllBlocks() {
+        let self = this;
+        let blocks = [];
+        return new Promise(function(resolve, reject){
+            // Add your code here, remember in Promises you need to resolve() or reject()
+            let height = 0;
+            self.db.createReadStream()
+                .on('data', function (data) {
+                    blocks.push(data);
+                })
+                .on('error', function (err) {
+                    return reject('get blocks failed!', err);
+                })
+                .on('close', function () {
+                    resolve(blocks);
+                })
+            // console.log('Value = ' + value);
+        });
+    }
+
+    // clean all data
+    cleanAllData() {
+        let self = this;
         
-
+        return new Promise(function(resolve, reject){
+            // Add your code here, remember in Promises you need to resolve() or reject()
+            let height = 0;
+            self.db.createReadStream()
+                .on('data', function (data) {
+                    self.db.del(data.key);
+                })
+                .on('error', function (err) {
+                    return reject('clean blocks failed!', err);
+                })
+                .on('close', function () {
+                    resolve("clean blocks success");
+                })
+            // console.log('Value = ' + value);
+        });
+    }
 }
-
 module.exports.LevelSandbox = LevelSandbox;
+
+
